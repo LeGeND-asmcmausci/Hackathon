@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sog'lomQadam — sog'lom turmush tarzi platformasi</title>
+    <meta
+      name="description"
+      content="Sog'lomQadam — o'zbek tilidagi bepul platforma: BMI va kaloriya kalkulyatorlari, milliy taomlar bazasi, uy mashqlari rejasi, 7 kunlik challenge va sog'lom maslahatchi."
+    />
+    <meta name="theme-color" content="#0d9b63" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Asosiy kontentga o'tish</a>
+
+    <header class="nav" id="nav">
+      <div class="container nav__inner">
+        <a class="brand" href="#hero" aria-label="Sog'lomQadam bosh sahifa">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.8 5.6a5.4 5.4 0 0 0-7.7 0L12 6.7l-1.1-1.1a5.4 5.4 0 1 0-7.7 7.7l1.1 1.1L12 22l7.7-7.6 1.1-1.1a5.4 5.4 0 0 0 0-7.7z" />
+            </svg>
+          </span>
+          <span class="brand__text">Sog'lom<em>Qadam</em></span>
+        </a>
+
+        <nav class="nav__links" id="navLinks" aria-label="Asosiy menyu">
+          <a href="#kalkulyatorlar">Kalkulyatorlar</a>
+          <a href="#taomlar">Taomlar</a>
+          <a href="#mashqlar">Mashqlar</a>
+          <a href="#challenge">Challenge</a>
+          <a href="#maslahatchi">Maslahatchi</a>
+          <a href="#loyiha">Loyiha</a>
+        </nav>
+
+        <div class="nav__actions">
+          <button class="btn btn--ghost btn--sm" id="navStats" type="button">
+            Bugungi natija: <strong id="navScore">0%</strong>
+          </button>
+          <a class="btn btn--primary btn--sm" href="#kalkulyatorlar">Boshlash</a>
+          <button class="nav__burger" id="navBurger" type="button" aria-label="Menyuni ochish" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- ============ HERO ============ -->
+      <section class="hero" id="hero">
+        <div class="container hero__inner">
+          <div class="hero__content">
+            <span class="badge">🏆 Hackathon 2026 · Senior group · «Sog'liq va sport»</span>
+            <h1 class="hero__title">
+              Sog'lom hayot —<br />
+              <span class="grad">bir qadamdan</span> boshlanadi
+            </h1>
+            <p class="hero__lead">
+              O'zbekiston sharoitiga mos, o'zbek tilidagi yagona platforma: milliy taomlarning kaloriyasi,
+              shaxsiy normangiz, uyda bajariladigan mashqlar va 7 kunlik sog'lom odatlar challenge'i —
+              hammasi bir joyda, ro'yxatdan o'tmasdan.
+            </p>
+            <div class="hero__cta">
+              <a class="btn btn--primary btn--lg" href="#kalkulyatorlar">Normamni bilish</a>
+              <a class="btn btn--outline btn--lg" href="#loyiha">Loyiha haqida</a>
+            </div>
+            <ul class="hero__points">
+              <li>✅ Ma'lumotlar faqat qurilmangizda (localStorage)</li>
+              <li>✅ Reklama va obuna yo'q — 100% bepul</li>
+              <li>✅ O'zbek milliy taomlari bazasi</li>
+            </ul>
+          </div>
+
+          <div class="hero__panel" aria-hidden="true">
+            <div class="panel">
+              <div class="panel__head">
+                <span class="panel__dot"></span><span class="panel__dot"></span><span class="panel__dot"></span>
+                <span class="panel__title">Bugungi kun rejasi</span>
+              </div>
+              <div class="panel__body">
+                <div class="panel__ring">
+                  <svg viewBox="0 0 120 120" width="132" height="132">
+                    <circle cx="60" cy="60" r="52" class="ring-bg" />
+                    <circle cx="60" cy="60" r="52" class="ring-fg" id="heroRing" />
+                  </svg>
+                  <div class="panel__ring-label"><strong id="heroScore">0%</strong><span>bajarildi</span></div>
+                </div>
+                <div class="panel__list">
+                  <div class="panel__item"><span>💧 Suv</span><b id="heroWater">0 / 2 L</b></div>
+                  <div class="panel__item"><span>🚶 Qadam</span><b>8 000</b></div>
+                  <div class="panel__item"><span>🔥 Kaloriya</span><b id="heroKcal">0 / 2000</b></div>
+                  <div class="panel__item"><span>🏋️ Mashq</span><b>30 daq</b></div>
+                </div>
+              </div>
+            </div>
+            <div class="hero__float hero__float--1">BMI 22.4 · norma</div>
+            <div class="hero__float hero__float--2">🔥 Osh 690 kcal</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MUAMMO ============ -->
+      <section class="section section--alt" id="muammo">
+        <div class="container">
+          <div class="section__head">
+            <span class="eyebrow">Muammo</span>
+            <h2>Nega aynan «Sog'liq va sport»?</h2>
+            <p>
+              Jismoniy harakatsizlik va noto'g'ri ovqatlanish — bugungi jamiyatning eng keng tarqalgan
+              sabablaridan biri. Ammo odamlarning qo'lidagi vositalar ko'pincha noto'g'ri tilde, noto'g'ri
+              mahsulotlar bazasida bo'ladi.
+            </p>
+          </div>
+
+          <div class="stats">
+            <article class="stat">
+              <b>1/3</b>
+              <span>kattalar yetarli darajada jismoniy faol emas</span>
+              <small>JSST ma'lumotlari</small>
+            </article>
+            <article class="stat">
+              <b>№1</b>
+              <span>yurak-qon tomir kasalliklari — vafot sabablari orasida</span>
+              <small>global statistika</small>
+            </article>
+            <article class="stat">
+              <b>~70%</b>
+              <span>odam «parhez»ni to'g'ri hisoblamasdan boshlaydi</span>
+              <small>amaliy kuzatuv</small>
+            </article>
+            <article class="stat">
+              <b>0</b>
+              <span>o'zbek milliy taomlari bazasi bor bepul ilova</span>
+              <small>bozor tahlili</small>
+            </article>
+          </div>
+
+          <div class="cards cards--3">
+            <article class="card">
+              <div class="card__icon">🇦🇫</div>
+              <h3>Chet el ilovalari noto'g'ri</h3>
+              <p>
+                Mashhur ilovalarda «palov», «somsa», «lag'mon» yo'q. Osh 690 kcal deb yozilmaydi — shuning
+                uchun hisob doim yonga chiqadi.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card__icon">📉</div>
+              <h3>Motivatsiya tez so'nadi</h3>
+              <p>
+                Sportzal abunasi o'rtacha 2–3 haftada to'xtaydi. Oddiy kundalik odatlar tizimi esa
+                davomiylikni 3–4 barobar oshiradi.
+              </p>
+            </article>
+            <article class="card">
+              <div class="card__icon">🔒</div>
+              <h3>Maxfiylik va to'siqlar</h3>
+              <p>
+                Ko'p ilovalar ro'yxatdan o'tishni, telefon raqamini talab qiladi. Bizning ma'lumotlar —
+                faqat sizning brauzeringizda.
+              </p>
+            </article>
+          </div>
+
+          <div class="solution">
+            <div>
+              <span class="eyebrow">Yechim</span>
+              <h3>Sog'lomQadam — bitta sahifada «hisobla → rejalashtir → bajar → saqla»</h3>
+              <ol class="steps">
+                <li><b>Hisobla:</b> BMI, kaloriya (TDEE), suv va qadam normangizni 30 soniyada bilib olasiz.</li>
+                <li><b>Rejalashtir:</b> maqsadingizga ko'ra uy mashqlari rejasi va kunlik ratson yig'iladi.</li>
+                <li><b>Bajar:</b> 7 kunlik challenge streak'i va dam taymeri odatlarni mustahkamlaydi.</li>
+                <li><b>Saqlash:</b> natijalar localStorage'da — serverga hech narsa yuborilmaydi.</li>
+              </ol>
+            </div>
+            <div class="solution__badges">
+              <span>🧮 4 ta kalkulyator</span>
+              <span>🍲 30+ ta milliy taom</span>
+              <span>🏋️ 25+ ta mashq</span>
+              <span>🎯 7 kunlik challenge</span>
+              <span>🤖 qoidalar asosidagi maslahatchi</span>
+              <span>⚡ 0 ta kutish — offline ishlaydi</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ KALKULYATORLAR ============ -->
+      <section class="section" id="kalkulyatorlar">
+        <div class="container">
+          <div class="section__head">
+            <span class="eyebrow">1-qadam · Hisobla</span>
+            <h2>Shaxsiy kalkulyatorlaringiz</h2>
+            <p>Ma'lumotlarni bir marta kiriting — natijalar darhol yangilanadi va boshqa bo'limlarda ishlatiladi.</p>
+          </div>
+
+          <div class="calc-grid">
+            <!-- BMI -->
+            <article class="calc" id="calcBmi">
+              <header class="calc__head">
+                <span class="calc__icon">⚖️</span>
+                <div><h3>BMI — tana massasi indeksi</h3><p>Vazn va bo'yga ko'ra holat bahosi</p></div>
+              </header>
+              <div class="calc__fields">
+                <label class="field"><span>Bo'y, sm</span>
+                  <input type="number" id="bmiHeight" min="120" max="230" value="172" inputmode="decimal" />
+                </label>
+                <label class="field"><span>Vazn, kg</span>
+                  <input type="number" id="bmiWeight" min="30" max="250" value="70" inputmode="decimal" />
+                </label>
+              </div>
+              <div class="calc__out">
+                <div class="calc__big"><b id="bmiValue">—</b><span>BMI</span></div>
+                <div class="calc__tag" id="bmiTag">ma'lumot kiriting</div>
+              </div>
+              <div class="scale" id="bmiScale" aria-hidden="true">
+                <span class="scale__bar"></span>
+                <span class="scale__marker" id="bmiMarker"></span>
+              </div>
+              <p class="calc__note" id="bmiNote">Ideal vazn diapazoni: <b>—</b></p>
+            </article>
+
+            <!-- KALORIYA -->
+            <article class="calc" id="calcKcal">
+              <header class="calc__head">
+                <span class="calc__icon">🔥</span>
+                <div><h3>Kaloriya normasi (TDEE)</h3><p>Mifflin–St Jeor formulasi + faollik koeffitsienti</p></div>
+              </header>
+              <div class="calc__fields calc__fields--3">
+                <label class="field field--sel"><span>Jins</span>
+                  <select id="kcalGender"><option value="m">Erkak</option><option value="f">Ayol</option></select>
+                </label>
+                <label class="field"><span>Yosh</span>
+                  <input type="number" id="kcalAge" min="14" max="100" value="24" inputmode="numeric" />
+                </label>
+                <label class="field"><span>Bo'y, sm</span>
+                  <input type="number" id="kcalHeight" min="120" max="230" value="172" inputmode="decimal" />
+                </label>
+                <label class="field"><span>Vazn, kg</span>
+                  <input type="number" id="kcalWeight" min="30" max="250" value="70" inputmode="decimal" />
+                </label>
+                <label class="field field--sel"><span>Faollik</span>
+                  <select id="kcalActivity">
+                    <option value="1.2">Davomiy o'tiradigan ish</option>
+                    <option value="1.375">Yengil (haftada 1–3 mashq)</option>
+                    <option value="1.55" selected>O'rtacha (haftada 3–5)</option>
+                    <option value="1.725">Yuqori (haftada 6–7)</option>
+                    <option value="1.9">Juda yuqori (kunlik mashq)</option>
+                  </select>
+                </label>
+                <label class="field field--sel"><span>Maqsad</span>
+                  <select id="kcalGoal">
+                    <option value="-15">Vazn kamaytirish</option>
+                    <option value="0" selected>Vaznni saqlash</option>
+                    <option value="10">Mushak ko'paytirish</option>
+                  </select>
+                </label>
+              </div>
+              <div class="calc__out">
+                <div class="calc__big"><b id="kcalValue">—</b><span>kcal / kun</span></div>
+                <div class="calc__tag" id="kcalTag">Sutoningiz</div>
+              </div>
+              <div class="macros" id="kcalMacros" aria-live="polite">
+                <div class="macro"><i style="--c:#38bdf8"></i><span>Oqsil</span><b>— g</b></div>
+                <div class="macro"><i style="--c:#a3e635"></i><span>Uglerod</span><b>— g</b></div>
+                <div class="macro"><i style="--c:#fbbf24"></i><span>Yog'</span><b>— g</b></div>
+              </div>
+            </article>
+
+            <!-- SUV -->
+            <article class="calc" id="calcWater">
+              <header class="calc__head">
+                <span class="calc__icon">💧</span>
+                <div><h3>Suv normasi</h3><p>Vazn, faollik va mavsumga ko'ra</p></div>
+              </header>
+              <div class="calc__fields">
+                <label class="field"><span>Vazn, kg</span>
+                  <input type="number" id="waterWeight" min="30" max="250" value="70" inputmode="decimal" />
+                </label>
+                <label class="field field--sel"><span>Faollik</span>
+                  <select id="waterActivity">
+                    <option value="30">Kam harakat</option>
+                    <option value="35" selected>O'rtacha</option>
+                    <option value="40">Ko'p terlaydi / sport</option>
+                  </select>
+                </label>
+              </div>
+              <div class="calc__out">
+                <div class="calc__big"><b id="waterValue">—</b><span>litr / kun</span></div>
+                <div class="calc__tag" id="waterTag">≈ — stakan</div>
+              </div>
+              <p class="calc__note">Hisob: vazn × ml (30–40) ÷ 1000. Issiq mavsumda +0,3–0,5 l.</p>
+            </article>
+
+            <!-- QADAM -->
+            <article class="calc" id="calcSteps">
+              <header class="calc__head">
+                <span class="calc__icon">👟</span>
+                <div><h3>Qadam va yurish maqsadi</h3><p>Kunlik normalar va yo'qiladigan kcal</p></div>
+              </header>
+              <div class="calc__fields">
+                <label class="field"><span>Bo'y, sm</span>
+                  <input type="number" id="stepHeight" min="120" max="230" value="172" inputmode="decimal" />
+                </label>
+                <label class="field"><span>Vazn, kg</span>
+                  <input type="number" id="stepWeight" min="30" max="250" value="70" inputmode="decimal" />
+                </label>
+              </div>
+              <div class="calc__out calc__out--pair">
+                <div class="calc__big"><b id="stepGoal">—</b><span>qadam / kun</span></div>
+                <div class="calc__big"><b id="stepKcal">—</b><span>kcal yurishda</span></div>
+              </div>
+              <p class="calc__note" id="stepNote">Qadamlar masofasi: <b>—</b></p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAOMLAR ============ -->
+      <section class="section section--alt" id="taomlar">
+        <div class="container">
+          <div class="section__head">
+            <span class="eyebrow">2-qadam · Rejalashtir</span>
+            <h2>Milliy taomlar bazasi va kunlik ratson</h2>
+            <p>
+              O'zbek taomlari bo'yicha o'rtacha qiymatlar (100 g / porsiya). Keraklisini qo'shing —
+              kunlik kaloriya hisobi avtomatik yangilanadi.
+            </p>
+          </div>
+
+          <div class="food">
+            <div class="food__catalog">
+              <div class="food__tools">
+                <input type="search" id="foodSearch" class="input" placeholder="🔎 Taom qidirin: osh, somsa, ayron…" aria-label="Taom qidirish" />
+                <div class="chips" id="foodCats" role="tablist" aria-label="Taom toifalari"></div>
+              </div>
+              <div class="food__grid" id="foodGrid" aria-live="polite"></div>
+              <p class="food__empty" id="foodEmpty" hidden>Bunday taom topilmadi — boshqa so'z bilan urinib ko'ring.</p>
+            </div>
+
+            <aside class="rationson" id="rationson">
+              <h3>🔥 Bugungi ratson</h3>
+              <div class="rationson__ring">
+                <svg viewBox="0 0 140 140" width="150" height="150">
+                  <circle cx="70" cy="70" r="60" class="ring-bg" />
+                  <circle cx="70" cy="70" r="60" class="ring-fg" id="foodRing" />
+                </svg>
+                <div class="rationson__label">
+                  <strong id="foodKcal">0</strong>
+                  <span>/ <b id="foodTarget">2000</b> kcal</span>
+                </div>
+              </div>
+              <div class="rationson__bar"><span id="foodBar"></span></div>
+              <p class="rationson__hint" id="foodHint">Taom qo'shing — hisob boshlansin.</p>
+              <ul class="rationson__list" id="foodList"></ul>
+              <button class="btn btn--ghost btn--sm" id="foodClear" type="button">Ratsonni tozalash</button>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MASHQLAR ============ -->
+      <section class="section" id="mashqlar">
+        <div class="container">
+          <div class="section__head">
+            <span class="eyebrow">2-qadam · Rejalashtir</span>
+            <h2>Uy sharoitidagi mashq rejasi</h2>
+            <p>Rejimni tanlang — platforma sizga mos kundalik reja tuzadi: vazifalar, to'plamlar va vaqt.</p>
+          </div>
+
+          <form class="genform" id="workoutForm">
+            <label class="field field--sel"><span>Maqsad</span>
+              <select id="wGoal">
+                <option value="fat">Vazn kamaytirish</option>
+                <option value="strength" selected>Kuch va rivojlanish</option>
+                <option value="cardio">Chaqqonlik va yurak</option>
+              </select>
+            </label>
+            <label class="field field--sel"><span>Daraja</span>
+              <select id="wLevel">
+                <option value="beginner" selected>Boshlang'ich</option>
+                <option value="medium">O'rta</option>
+                <option value="advanced">Ilg'or</option>
+              </select>
+            </label>
+            <label class="field field--sel"><span>Haftada</span>
+              <select id="wDays">
+                <option value="3" selected>3 kun</option>
+                <option value="4">4 kun</option>
+                <option value="5">5 kun</option>
+              </select>
+            </label>
+            <label class="field field--sel"><span>Bir mashq</span>
+              <select id="wDuration">
+                <option value="15">15 daqiqa</option>
+                <option value="30" selected>30 daqiqa</option>
+                <option value="45">45 daqiqa</option>
+              </select>
+            </label>
+            <button class="btn btn--primary" type="submit">Rejani yasash 🎲</button>
+          </form>
+
+          <div class="plan" id="workoutPlan" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <!-- ============ CHALLENGE ============ -->
+      <section class="section section--alt" id="challenge">
+        <div class="container">
+          <div class="section__head">
+            <span class="eyebrow">3-qadam · Bajar</span>
+            <h2>7 kunlik sog'lom odatlar challenge'i</h2>
+            <p>Kunlik 6 ta oddiy vazifani bajaring, streak'ni saqlang — davomiylik eng kuchli motivator.</p>
+          </div>
+
+          <div class="challenge">
+            <div class="challenge__panel">
+              <div class="challenge__top">
+                <div class="streak">
+                  <b id="streakValue">0</b>
+                  <span>kunlik streak 🔥</span>
+                </div>
+                <div class="challenge__date" id="challengeDate">—</div>
+              </div>
+              <ul class="habits" id="habitsList"></ul>
+              <div class="challenge__actions">
+                <button class="btn btn--primary" id="finishDay" type="button">Kunni yakunlash ✅</button>
+                <button class="btn btn--ghost btn--sm" id="resetAll" type="button">Boshidan boshlash</button>
+              </div>
+              <p class="challenge__msg" id="challengeMsg" role="status"></p>
+            </div>
+
+            <div class="challenge__chart">
+              <h3>So'nggi 7 kun</h3>
+              <canvas id="weekChart" width="520" height="260" aria-label="Haftalik natijalar grafigi"></canvas>
+              <div class="challenge__legend">
+                <span><i class="dot dot--good"></i> ≥80% — a'lo</span>
+                <span><i class="dot dot--mid"></i> 40–79%</span>
+                <span><i class="dot dot--bad"></i> &lt;40%</span>
+              </div>
+              <div class="challenge__kpi">
+                <div><b id="kpiBest">0</b><span>eng yaxshi kun</span></div>
+                <div><b id="kpiAvg">0%</b><span>o'rtacha</span></div>
+                <div><b id="kpiDone">0</b><span>to'liq kun</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TAYMER + MASLAHATCHI ============ -->
+      <section class="section" id="vositalar">
+        <div class="container">
+          <div class="toolkit">
+            <!-- TAYMER -->
+            <article class="timer" id="timer">
+              <span class="eyebrow">Dam olish taymeri</span>
+              <h2>45 daqiqada bir — ko'z va tanaga dam bering</h2>
+              <p class="timer__desc">
+                Uzoq o'tirish sog'likka zarar. Taymer ishga tushgunda belgilangan vaqtdan so'ng 5 daqiqalik
+                tanaffusga o'ting — qoida: <b>45/5</b> yoki ko'z uchun <b>20-20-20</b>.
+              </p>
+              <div class="timer__ring">
+                <svg viewBox="0 0 220 220" width="220" height="220">
+                  <circle cx="110" cy="110" r="96" class="ring-bg" />
+                  <circle cx="110" cy="110" r="96" class="ring-fg" id="timerRing" />
+                </svg>
+                <div class="timer__time">
+                  <b id="timerDisplay">45:00</b>
+                  <span id="timerState">tayyor</span>
+                </div>
+              </div>
+              <div class="chips chips--center" id="timerPresets">
+                <button class="chip is-active" data-min="45" type="button">45/5 ish</button>
+                <button class="chip" data-min="25" type="button">25/5 pomodoro</button>
+                <button class="chip" data-min="20" type="button">20 daq</button>
+                <button class="chip" data-min="5" type="button">5 daqqa dam</button>
+              </div>
+              <div class="timer__actions">
+                <button class="btn btn--primary" id="timerToggle" type="button">Boshlash ▶</button>
+                <button class="btn btn--ghost" id="timerReset" type="button">Tozalash</button>
+              </div>
+            </article>
+
+            <!-- MASLAHATCHI -->
+            <article class="advisor" id="maslahatchi">
+              <header class="advisor__head">
+                <span class="advisor__avatar">🤖</span>
+                <div>
+                  <h3>Sog'lom maslahatchi</h3>
+                  <p>Qoidalar asosida ishlaydi · offline · ma'lumot yubormaydi</p>
+                </div>
+              </header>
+
+              <div class="advisor__msgs" id="advisorMsgs" role="log" aria-live="polite"></div>
+
+              <div class="chips" id="advisorChips">
+                <button class="chip" type="button">Qancha suv ichishim kerak?</button>
+                <button class="chip" type="button">Vaznni qanday kamaytiraman?</button>
+                <button class="chip" type="button">Bugun nima yeyishim mumkin?</button>
+                <button class="chip" type="button">Mashqni qanday boshlash?</button>
+                <button class="chip" type="button">Uyqim yetmayapti</button>
+              </div>
+
+              <form class="advisor__form" id="advisorForm">
+                <input class="input" id="advisorInput" type="text" placeholder="Savolingizni yozing…" autocomplete="off" aria-label="Savol" />
+                <button class="btn btn--primary" type="submit" aria-label="Yuborish">Jo'natish</button>
+              </form>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ LOYIHA ============ -->
+      <section class="section section--alt" id="loyiha">
+        <div class="container">
+          <div class="section__head">
+            <span class="eyebrow">Loyiha</span>
+            <h2>Texnik tuzilma va keyingi qadamlar</h2>
+            <p>Platforma statik sayt sifatida qurilgan: tez, xavfsiz, hosting talab qilmaydi.</p>
+          </div>
+
+          <div class="cards cards--3">
+            <article class="card">
+              <div class="card__icon">⚙️</div>
+              <h3>Texnologiya</h3>
+              <ul class="ticks">
+                <li>TypeScript + Vite (strict rejim)</li>
+                <li>Modulga ajratilgan arxitektura</li>
+                <li>Safety: hech qanday tashqi API yo'q</li>
+                <li>Canvas grafik, SVG animatsiya</li>
+              </ul>
+            </article>
+            <article class="card">
+              <div class="card__icon">🧠</div>
+              <h3>G'oyaning kreativligi</h3>
+              <ul class="ticks">
+                <li>Milliy taomlar bazasi — raqobatda yagona</li>
+                <li>Streak + kunlik natija = davomiylik mexanizmi</li>
+                <li>Tibbiy ma'lumot emas, yo'riqnoma sifatida</li>
+                <li>Ro'yxatdan o'tishsiz, maxfiy</li>
+              </ul>
+            </article>
+            <article class="card">
+              <div class="card__icon">🚀</div>
+              <h3>Roadmap</h3>
+              <ul class="ticks">
+                <li>v1.0 — MVP (bu loyiha)</li>
+                <li>v1.1 — PWA + oflayn o'rnatish</li>
+                <li>v1.2 — Fitnes-tracker bilan sinxron</li>
+                <li>v2.0 — shifokor konsultatsiyasi (API)</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="cta">
+            <div>
+              <h3>Hozir sinab ko'ring 👇</h3>
+              <p>Kalkulyatorni to'ldiring, ratsonni yig'ing, reja oling va challenge'ni boshlang.</p>
+            </div>
+            <a class="btn btn--primary btn--lg" href="#kalkulyatorlar">Bepul boshlash</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>
+          <span class="brand__text">Sog'lom<em>Qadam</em></span>
+          <p>«Sog'liq va sport» mavzusi · Senior group · Hackathon 2026</p>
+        </div>
+        <div class="footer__note">
+          <p>
+            ⚠️ Bu platforma tibbiy maslahat emas. Og'riq, kasallik yoki shubha bo'lsa — albatta
+            shifokorga murojaat qiling.
+          </p>
+          <p>Ma'lumotlaringiz faqat qurilmangizda saqlanadi. © 2026</p>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "saglamqadam",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Sog'lomQadam — o'zbek tilidagi sog'lom turmush tarzi platformasi (Hackathon, Senior group)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "pptx": "node presentation/generate-pptx.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "pptxgenjs": "^3.12.0",
+    "typescript": "^5.6.3",
+    "vite": "^7.1.5"
+  }
+}

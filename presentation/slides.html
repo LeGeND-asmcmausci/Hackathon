@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sog'lomQadam — Prezentatsiya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0c1a15;
+        --ink-2: #33443d;
+        --muted: #64766e;
+        --brand: #0d9b63;
+        --brand-500: #22c98a;
+        --brand-soft: #e4f6ee;
+        --bg: #f5f8f6;
+        --line: #e2eae5;
+        --grad: linear-gradient(135deg, #0d9b63 0%, #22c98a 55%, #7dd36c 100%);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        font-family: 'Manrope', system-ui, sans-serif;
+        background: #0c1a15;
+        color: var(--ink);
+        overflow: hidden;
+        height: 100vh;
+      }
+      .deck {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(34px, 6vw, 96px);
+        background: var(--bg);
+        animation: in 0.45s ease;
+      }
+      .slide.is-active {
+        display: flex;
+      }
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .dark {
+        background: radial-gradient(900px 500px at 85% -10%, rgba(34, 201, 138, 0.25), transparent 60%),
+          radial-gradient(700px 420px at -10% 30%, rgba(125, 211, 108, 0.2), transparent 60%), #0c1a15;
+        color: #eaf5f0;
+      }
+      .kicker {
+        display: inline-flex;
+        align-self: flex-start;
+        gap: 8px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 16px;
+        font-size: clamp(12px, 1.1vw, 15px);
+        font-weight: 700;
+        color: var(--ink-2);
+        margin-bottom: 26px;
+      }
+      .dark .kicker {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.16);
+        color: #cfe8dd;
+      }
+      h1 {
+        font-size: clamp(38px, 5.6vw, 84px);
+        line-height: 1.04;
+        letter-spacing: -0.03em;
+        font-weight: 800;
+        max-width: 20ch;
+      }
+      h2 {
+        font-size: clamp(30px, 4vw, 58px);
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+        font-weight: 800;
+        margin-bottom: 26px;
+      }
+      .grad {
+        background: var(--grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .lead {
+        font-size: clamp(16px, 1.7vw, 25px);
+        color: var(--ink-2);
+        max-width: 62ch;
+        margin-top: 22px;
+        line-height: 1.55;
+      }
+      .dark .lead {
+        color: #b9ccc4;
+      }
+      .grid {
+        display: grid;
+        gap: clamp(12px, 1.6vw, 24px);
+        margin-top: clamp(18px, 2.4vw, 40px);
+      }
+      .g2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .g3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .g4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: clamp(14px, 1.5vw, 22px);
+        padding: clamp(16px, 1.9vw, 30px);
+      }
+      .dark .card {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.12);
+        color: #eaf5f0;
+      }
+      .card h3 {
+        font-size: clamp(16px, 1.5vw, 23px);
+        margin-bottom: 8px;
+        font-weight: 800;
+      }
+      .card p,
+      .card li {
+        font-size: clamp(13px, 1.2vw, 18px);
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .dark .card p,
+      .dark .card li {
+        color: #b9ccc4;
+      }
+      .icon {
+        font-size: clamp(24px, 2.6vw, 40px);
+        margin-bottom: 12px;
+        display: block;
+      }
+      .stat {
+        font-size: clamp(34px, 4.4vw, 66px);
+        font-weight: 800;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1;
+      }
+      .stat + span {
+        display: block;
+        margin-top: 10px;
+        font-size: clamp(13px, 1.2vw, 18px);
+        color: var(--ink-2);
+      }
+      .dark .stat + span {
+        color: #cfe8dd;
+      }
+      ul.clean {
+        list-style: none;
+        display: grid;
+        gap: clamp(8px, 1vw, 14px);
+        margin-top: 18px;
+      }
+      ul.clean li {
+        font-size: clamp(15px, 1.5vw, 23px);
+        color: var(--ink-2);
+      }
+      ul.clean li::before {
+        content: '✓';
+        color: var(--brand);
+        font-weight: 800;
+        margin-right: 12px;
+      }
+      .dark ul.clean li {
+        color: #cfe8dd;
+      }
+      .flow {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        gap: clamp(8px, 1vw, 16px);
+        margin-top: clamp(16px, 2vw, 34px);
+      }
+      .flow .step {
+        flex: 1 1 180px;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: clamp(14px, 1.6vw, 26px);
+      }
+      .flow .step b {
+        display: block;
+        font-size: clamp(15px, 1.4vw, 22px);
+        margin-bottom: 6px;
+      }
+      .flow .step span {
+        font-size: clamp(12px, 1.1vw, 16px);
+        color: var(--muted);
+      }
+      .arrow {
+        align-self: center;
+        color: var(--brand);
+        font-size: clamp(18px, 2vw, 30px);
+        font-weight: 800;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: clamp(16px, 2vw, 30px);
+      }
+      .badge-row span {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        color: #cfe8dd;
+        border-radius: 999px;
+        padding: 9px 17px;
+        font-size: clamp(12px, 1.1vw, 17px);
+        font-weight: 600;
+      }
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 22px;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .table th,
+      .table td {
+        padding: clamp(10px, 1.2vw, 18px) clamp(12px, 1.4vw, 22px);
+        text-align: left;
+        font-size: clamp(13px, 1.2vw, 18px);
+        border-bottom: 1px solid var(--line);
+      }
+      .table th {
+        background: var(--brand-soft);
+        color: var(--brand);
+        font-weight: 800;
+      }
+      .table tr:last-child td {
+        border-bottom: 0;
+      }
+      .table td:first-child {
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .link {
+        display: inline-block;
+        margin-top: 22px;
+        background: var(--grad);
+        color: #fff;
+        font-weight: 800;
+        border-radius: 999px;
+        padding: 14px 30px;
+        font-size: clamp(14px, 1.4vw, 21px);
+        text-decoration: none;
+      }
+      .foot {
+        position: absolute;
+        left: clamp(34px, 6vw, 96px);
+        right: clamp(34px, 6vw, 96px);
+        bottom: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .dark .foot {
+        color: #7f968c;
+      }
+      .bar {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 5px;
+        background: var(--grad);
+        transition: width 0.35s ease;
+      }
+      .hint {
+        position: fixed;
+        right: 18px;
+        top: 16px;
+        z-index: 9;
+        font-size: 12px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 6px 12px;
+        backdrop-filter: blur(6px);
+      }
+      .clickzone {
+        position: absolute;
+        top: 0;
+        bottom: 40px;
+        width: 22%;
+        z-index: 5;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+      }
+      .clickzone--prev {
+        left: 0;
+      }
+      .clickzone--next {
+        right: 0;
+      }
+      code {
+        background: var(--brand-soft);
+        color: var(--brand);
+        padding: 3px 9px;
+        border-radius: 8px;
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hint">← → yoki bo'shliq tugmalari</div>
+
+    <!-- 1. SARLAVHA -->
+    <section class="slide dark is-active">
+      <span class="kicker">🏆 Hackathon 2026 · Senior group · «Sog'liq va sport»</span>
+      <h1>Sog'lom<span class="grad">Qadam</span></h1>
+      <p class="lead">Sog'lom hayot — bir qadamdan boshlanadi. O'zbek sharoitidagi birinchi to'liq o'zbek tilidagi sog'lom turmush tarzi platformasi.</p>
+      <div class="badge-row">
+        <span>🧮 4 ta kalkulyator</span>
+        <span>🍲 40 ta milliy taom</span>
+        <span>🏋️ 26 ta mashq</span>
+        <span>🎯 7 kunlik challenge</span>
+        <span>🤖 onlayn maslahatchi</span>
+      </div>
+      <a class="link" href="https://site-a759875af4e24f2b96edba0601ae7c0d.freebuff.page" target="_blank">🔗 Demo: site-a759875af4e24f2b96edba0601ae7c0d.freebuff.page</a>
+      <div class="foot"><span>Sog'lomQadam · Jamoa: ______</span><span>1 / 11</span></div>
+      <div class="bar" style="width: 9%"></div>
+    </section>
+
+    <!-- 2. MUAMMO -->
+    <section class="slide">
+      <span class="kicker">Muammo</span>
+      <h2>Sog'lik — eng katta, lekin eng e'tiborsiz reja</h2>
+      <div class="grid g4">
+        <div class="card"><span class="stat">1/3</span><span>kattalar jismoniy faollik normasiga yetmaydi (JSST)</span></div>
+        <div class="card"><span class="stat">№1</span><span>yurak-qon tomir kasalliklari — vafot sabablari boshida</span></div>
+        <div class="card"><span class="stat">70%</span><span>«parhez» hisobsiz boshlanadi va tez to'xtaydi</span></div>
+        <div class="card"><span class="stat">0</span><span>o'zbek taomlari bazasi bor bepul ilova</span></div>
+      </div>
+      <p class="lead">Muammo faqat «ko'proq sport qiling» da emas: odamda o'z normasini biladigan, milliy ovqatini hisoblaydigan va odatni ushlab turadigan vosita yo'q.</p>
+      <div class="foot"><span>Sog'lomQadam</span><span>2 / 11</span></div>
+      <div class="bar" style="width: 18%"></div>
+    </section>
+
+    <!-- 3. NOYOB QIYMAT -->
+    <section class="slide">
+      <span class="kicker">Nega biz?</span>
+      <h2>Mavjud ilovalar shu muammoga javob bermaydi</h2>
+      <div class="grid g3">
+        <div class="card"><span class="icon">🌍</span><h3>Notog'ri bazalar</h3><p>Chet el ilovalarida «osh», «somsa», «lag'mon» yo'q — hisob doim yonga chiqadi. Bizda 40 ta milliy taom, porsiya va makronutrientlar bilan.</p></div>
+        <div class="card"><span class="icon">🔒</span><h3>To'siqli kirish</h3><p>Ro'yxatdan o'tish, raqam, reklama, obuna. Bizda: och → ishla. Ma'lumot faqat qurilmada (localStorage).</p></div>
+        <div class="card"><span class="icon">📉</span><h3>Motivatsiya so'nadi</h3><p>Abunalar 2–3 haftada tugaydi. Bizda streak va kunlik natija — davomiylikni ushlab turuvchi mexanizm.</p></div>
+      </div>
+      <table class="table">
+        <tr><th>Vosita</th><th>O'zbekcha</th><th>Milliy taomlar bazasi</th><th>Ro'yxatsiz</th><th>Streak mexanizmi</th></tr>
+        <tr><td>Chet el ilovalari</td><td>Yo'q</td><td>Yo'q</td><td>Ko'pincha yo'q</td><td>Qisman</td></tr>
+        <tr><td>Mahalliy ilovalar</td><td>Ha</td><td>Cheklangan</td><td>Har xil</td><td>Yo'q</td></tr>
+        <tr><td><b>Sog'lomQadam</b></td><td><b>Ha, to'liq</b></td><td><b>40 ta, + MAKRO</b></td><td><b>Ha</b></td><td><b>Ha</b></td></tr>
+      </table>
+      <div class="foot"><span>Sog'lomQadam</span><span>3 / 11</span></div>
+      <div class="bar" style="width: 27%"></div>
+    </section>
+
+    <!-- 4. YECHIM -->
+    <section class="slide">
+      <span class="kicker">Yechim</span>
+      <h2>«Hisobla → Rejalashtir → Bajar → Saqla»</h2>
+      <div class="flow">
+        <div class="step"><b>1. Hisobla</b><span>BMI, kaloriya (TDEE), suv va qadam normasi — 30 soniyada</span></div>
+        <span class="arrow">→</span>
+        <div class="step"><b>2. Rejalashtir</b><span>Maqsadga mos uy mashqlari reja + kunlik ratson</span></div>
+        <span class="arrow">→</span>
+        <div class="step"><b>3. Bajar</b><span>7 kunlik challenge, dam taymeri, maslahatchi yonida</span></div>
+        <span class="arrow">→</span>
+        <div class="step"><b>4. Saqla</b><span>Natijalar qurilmada qoladi, grafikda ko'rinadi</span></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>🎯 Kim uchun</h3><p>O'rtacha yoshli office xodimlari, talabalar, sportga qaytmoqchi bo'lganlar — ya'ni bizning o'zimiz.</p></div>
+        <div class="card"><h3>⚡ Nega tez ishlaydi</h3><p>Server yo'q, kutish yo'q, reklama yo'q. Sahifa ochiladi va darhol ishlaydi — hatto sekin internetda.</p></div>
+      </div>
+      <div class="foot"><span>Sog'lomQadam</span><span>4 / 11</span></div>
+      <div class="bar" style="width: 36%"></div>
+    </section>
+
+    <!-- 5. IMKONIYATLAR -->
+    <section class="slide">
+      <span class="kicker">Imkoniyatlar</span>
+      <h2>Bitta sahifada 6 ta vosita</h2>
+      <div class="grid g3">
+        <div class="card"><span class="icon">⚖️</span><h3>BMI + ideal vazn</h3><p>Rangli shkala, holat va shaxsiy vazn diapazoni.</p></div>
+        <div class="card"><span class="icon">🔥</span><h3>Kaloriya (TDEE)</h3><p>Mifflin–St Jeor, faollik koeffitsienti, maqsad va makronutrientlar.</p></div>
+        <div class="card"><span class="icon">💧</span><h3>Suv va qadam</h3><p>Vazn va faollikka ko'ra litr, stakan va kunlik qadam maqsadi.</p></div>
+        <div class="card"><span class="icon">🍲</span><h3>Milliy taomlar bazasi</h3><p>40 ta taom: kaloriya + oqsil/uglerod/yog', qidiruv va toifalar.</p></div>
+        <div class="card"><span class="icon">🏋️</span><h3>Mashq rejasi generatori</h3><p>Maqsad × daraja × kun × vaqt → tayyor haftalik reja.</p></div>
+        <div class="card"><span class="icon">🎯</span><h3>Challenge + taymer</h3><p>6 ta odat, streak, 7 kunlik grafik va 45/5 dam taymeri.</p></div>
+      </div>
+      <div class="foot"><span>Sog'lomQadam</span><span>5 / 11</span></div>
+      <div class="bar" style="width: 45%"></div>
+    </section>
+
+    <!-- 6. DEMO -->
+    <section class="slide dark">
+      <span class="kicker">Demo</span>
+      <h2>Haqiqiy platforma — havolani ochib ko'ring</h2>
+      <div class="grid g2">
+        <div class="card">
+          <h3>🖥️ Nima ko'rasiz</h3>
+          <ul class="clean">
+            <li>Hisoblash: vazn 95 kg → BMI va norma darhol yangilanadi</li>
+            <li>Ratson: «Osh»ni qo'shing → hisob yuradi</li>
+            <li>Reja: 30 daqiqa, 3 kun → tayyor mashq kartalari</li>
+            <li>Challenge: odatlarni belgilang → grafik to'ldiriladi</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>🧪 Tekshirilgan</h3>
+          <ul class="clean">
+            <li>TypeScript strict — xato yo'q</li>
+            <li>Build: JS 33 kB, CSS 22 kB (g'azsiz tezlik)</li>
+            <li>Offlayn ishlaydi, tashqi API yo'q</li>
+            <li>Mobil va desktop uchun moslashuvchan</li>
+          </ul>
+        </div>
+      </div>
+      <a class="link" href="https://site-a759875af4e24f2b96edba0601ae7c0d.freebuff.page" target="_blank">🔗 Demoni ochish</a>
+      <div class="foot"><span>Sog'lomQadam</span><span>6 / 11</span></div>
+      <div class="bar" style="width: 55%"></div>
+    </section>
+
+    <!-- 7. TEXNIK -->
+    <section class="slide">
+      <span class="kicker">Texnik qism</span>
+      <h2>Yengil, xavfsiz va mustaqil arxitektura</h2>
+      <div class="grid g4">
+        <div class="card"><span class="icon">⚙️</span><h3>Stack</h3><p>TypeScript (strict) + Vite. Frameworksiz — kam bog'liqlik, tez build.</p></div>
+        <div class="card"><span class="icon">🧩</span><h3>Modullar</h3><p><code>data/</code> — bazalar, <code>lib/</code> — hisob va store, <code>modules/</code> — UI bloklar.</p></div>
+        <div class="card"><span class="icon">🗄️</span><h3>Ma'lumot</h3><p>localStorage + kichik pub/sub. Server va ma'lumot uzatish yo'q.</p></div>
+        <div class="card"><span class="icon">🚀</span><h3>Hosting</h3><p>Cloudflare Worker + statik assetlar. Global CDN, TLS, avtomatik.</p></div>
+      </div>
+      <div class="grid g3">
+        <div class="card"><h3>Canvas grafik</h3><p>Haftalik natija — qo'lda chizilgan, pixel-artga qarshi aniqlik (DPR).</p></div>
+        <div class="card"><h3>SVG animatsiya</h3><p>Ring progress: BMI, ratson va taymer bir tilda.</p></div>
+        <div class="card"><h3>Qoidalar dvigateli</h3><p>Maslahatchi — offline, izohlangan qoidalar, hech qanday LLM/xarajat yo'q.</p></div>
+      </div>
+      <div class="foot"><span>Sog'lomQadam</span><span>7 / 11</span></div>
+      <div class="bar" style="width: 64%"></div>
+    </section>
+
+    <!-- 8. FOYDA -->
+    <section class="slide">
+      <span class="kicker">Foyda</span>
+      <h2>Bu qanday yordam beradi — raqamlarda</h2>
+      <div class="grid g4">
+        <div class="card"><span class="stat">30 son</span><span>shaxsiy normangizni bilish uchun</span></div>
+        <div class="card"><span class="stat">40 ta</span><span>taom bo'yicha xato hisoblash yo'qoladi</span></div>
+        <div class="card"><span class="stat">7 kun</span><span>odat shakllanishining minimal davri — streak ushlaydi</span></div>
+        <div class="card"><span class="stat">0 ₽</span><span>reklama, obuna, server xarajati — foydalanuvchiga</span></div>
+      </div>
+      <ul class="clean">
+        <li>Oshcho'zuvchining «taxminiy» hisobi o'rniga — aniq raqam va chegaraviy ogohlantirish</li>
+        <li>Uyda mashq qiladiganlar uchun jihoz talab qilmaydigan reja</li>
+        <li>Maxfiylik: tibbiy ma'lumot hech qayerga yuborilmaydi</li>
+      </ul>
+      <div class="foot"><span>Sog'lomQadam</span><span>8 / 11</span></div>
+      <div class="bar" style="width: 73%"></div>
+    </section>
+
+    <!-- 9. ROADMAP -->
+    <section class="slide">
+      <span class="kicker">Rivojlanish</span>
+      <h2>Keyingi qadamlar</h2>
+      <div class="flow">
+        <div class="step"><b>v1.0 — Hozir</b><span>MVP: hisob, taomlar, reja, challenge, taymer, maslahatchi</span></div>
+        <span class="arrow">→</span>
+        <div class="step"><b>v1.1 — +1 oy</b><span>PWA: telefonga o'rnatish, oflayn bildirishnomalar</span></div>
+        <span class="arrow">→</span>
+        <div class="step"><b>v1.2 — +3 oy</b><span>Fitnes-braslet bilan sinxron (qadam, uyqu)</span></div>
+        <span class="arrow">→</span>
+        <div class="step"><b>v2.0</b><span>Shifokor konsultatsiyasi va shaxsiyatlashtirilgan reja</span></div>
+      </div>
+      <div class="grid g2">
+        <div class="card"><h3>📢 Marketing</h3><p>Talabalar va office guruhlari uchun «21 kunlik challenge» — organik tarqalish.</p></div>
+        <div class="card"><h3>💰 Monetizatsiya (istiqbolda)</h3><p>Bepul asos + premium: oilaviy hisob, PDF hisobot, shifokor bilan ulanish.</p></div>
+      </div>
+      <div class="foot"><span>Sog'lomQadam</span><span>9 / 11</span></div>
+      <div class="bar" style="width: 82%"></div>
+    </section>
+
+    <!-- 10. MEZONLAR -->
+    <section class="slide">
+      <span class="kicker">Xulosa</span>
+      <h2>Baholash mezonlariga moslik</h2>
+      <table class="table">
+        <tr><th>Mezon</th><th>Nima taklif qilamiz</th></tr>
+        <tr><td>💡 G'oya (50)</td><td>Dolzarb muammo (sog'lik + noto'g'ri hisob) va noyob yechim: milliy taomlar bazasi + davomiylik mexanizmi</td></tr>
+        <tr><td>🎤 Pitch (30)</td><td>«Hisobla → Rejalashtir → Bajar → saqla» — bitta gapda mohiyat, jonli demo bilan</td></tr>
+        <tr><td>📊 Prezentatsiya (20)</td><td>Bir xil dizayn tizimi, raqamlar va jadval, o'zbek tilida</td></tr>
+        <tr><td>💻 Texnik (10)</td><td>TypeScript strict, modul arxitektura, tashqi API'siz xavfsizlik, CI-ga tayyor build</td></tr>
+      </table>
+      <div class="foot"><span>Sog'lomQadam</span><span>10 / 11</span></div>
+      <div class="bar" style="width: 91%"></div>
+    </section>
+
+    <!-- 11. RAHMAT -->
+    <section class="slide dark">
+      <span class="kicker">Rahmat!</span>
+      <h1>Savollaringizga <span class="grad">tayyor</span></h1>
+      <p class="lead">Sog'lomQadam — sog'likni rejalashtirishni osonlashtiradi, sabrni esa mexanizm saqlaydi.</p>
+      <div class="badge-row">
+        <span>🔗 Demo: freebuff.page</span>
+        <span>📦 ZIP: to'liq kodlar</span>
+        <span>📊 Prezentatsiya: HTML + PPTX</span>
+      </div>
+      <a class="link" href="https://site-a759875af4e24f2b96edba0601ae7c0d.freebuff.page" target="_blank">🔗 Demoni sinab ko'rish</a>
+      <div class="foot"><span>Sog'lomQadam · Hackathon 2026</span><span>11 / 11</span></div>
+      <div class="bar" style="width: 100%"></div>
+    </section>
+
+    <button class="clickzone clickzone--prev" aria-label="Oldingi slayd"></button>
+    <button class="clickzone clickzone--next" aria-label="Keyingi slayd"></button>
+
+    <script>
+      const slides = [...document.querySelectorAll('.slide')];
+      let i = 0;
+
+      const show = (n) => {
+        i = Math.max(0, Math.min(slides.length - 1, n));
+        slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+      };
+
+      document.addEventListener('keydown', (e) => {
+        if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) {
+          e.preventDefault();
+          show(i + 1);
+        } else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) {
+          e.preventDefault();
+          show(i - 1);
+        } else if (e.key === 'Home') show(0);
+        else if (e.key === 'End') show(slides.length - 1);
+        else if (e.key.toLowerCase() === 'f') document.documentElement.requestFullscreen?.();
+      });
+
+      document.querySelector('.clickzone--next').addEventListener('click', () => show(i + 1));
+      document.querySelector('.clickzone--prev').addEventListener('click', () => show(i - 1));
+    </script>
+  </body>
+</html>
