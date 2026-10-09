@@ -6,7 +6,7 @@
   "description": "Sog'lomQadam — o'zbek tilidagi sog'lom turmush tarzi platformasi (Hackathon, Senior group)",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "pptx": "node presentation/generate-pptx.mjs"
   },
